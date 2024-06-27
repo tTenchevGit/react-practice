@@ -1,0 +1,404 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "description": "This is a description for Product 1.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 1,
+          "user": "User1",
+          "comment": "Great product!",
+          "stars": 5
+        },
+        {
+          "id": 2,
+          "user": "User2",
+          "comment": "Very useful.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "description": "This is a description for Product 2.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 3,
+          "user": "User3",
+          "comment": "Not bad.",
+          "stars": 3
+        },
+        {
+          "id": 4,
+          "user": "User4",
+          "comment": "I like it.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Product 3",
+      "description": "This is a description for Product 3.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 5,
+          "user": "User5",
+          "comment": "Could be better.",
+          "stars": 3
+        },
+        {
+          "id": 6,
+          "user": "User6",
+          "comment": "Satisfied.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Product 4",
+      "description": "This is a description for Product 4.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 7,
+          "user": "User7",
+          "comment": "Excellent!",
+          "stars": 5
+        },
+        {
+          "id": 8,
+          "user": "User8",
+          "comment": "Worth the price.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Product 5",
+      "description": "This is a description for Product 5.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 9,
+          "user": "User9",
+          "comment": "Not what I expected.",
+          "stars": 2
+        },
+        {
+          "id": 10,
+          "user": "User10",
+          "comment": "Good product.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Product 6",
+      "description": "This is a description for Product 6.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 11,
+          "user": "User11",
+          "comment": "Fantastic!",
+          "stars": 5
+        },
+        {
+          "id": 12,
+          "user": "User12",
+          "comment": "Very happy with this.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Product 7",
+      "description": "This is a description for Product 7.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 13,
+          "user": "User13",
+          "comment": "Just okay.",
+          "stars": 3
+        },
+        {
+          "id": 14,
+          "user": "User14",
+          "comment": "Works well.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Product 8",
+      "description": "This is a description for Product 8.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 15,
+          "user": "User15",
+          "comment": "Could be improved.",
+          "stars": 3
+        },
+        {
+          "id": 16,
+          "user": "User16",
+          "comment": "I recommend this.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Product 9",
+      "description": "This is a description for Product 9.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 17,
+          "user": "User17",
+          "comment": "High quality.",
+          "stars": 5
+        },
+        {
+          "id": 18,
+          "user": "User18",
+          "comment": "Love it.",
+          "stars": 5
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Product 10",
+      "description": "This is a description for Product 10.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 19,
+          "user": "User19",
+          "comment": "It's okay.",
+          "stars": 3
+        },
+        {
+          "id": 20,
+          "user": "User20",
+          "comment": "Good value.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Product 11",
+      "description": "This is a description for Product 11.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 21,
+          "user": "User21",
+          "comment": "Not bad.",
+          "stars": 3
+        },
+        {
+          "id": 22,
+          "user": "User22",
+          "comment": "Very good.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Product 12",
+      "description": "This is a description for Product 12.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 23,
+          "user": "User23",
+          "comment": "Amazing product!",
+          "stars": 5
+        },
+        {
+          "id": 24,
+          "user": "User24",
+          "comment": "Highly recommend.",
+          "stars": 5
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Product 13",
+      "description": "This is a description for Product 13.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 25,
+          "user": "User25",
+          "comment": "Very useful.",
+          "stars": 4
+        },
+        {
+          "id": 26,
+          "user": "User26",
+          "comment": "Good quality.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Product 14",
+      "description": "This is a description for Product 14.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 27,
+          "user": "User27",
+          "comment": "Not what I wanted.",
+          "stars": 2
+        },
+        {
+          "id": 28,
+          "user": "User28",
+          "comment": "Works fine.",
+          "stars": 3
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Product 15",
+      "description": "This is a description for Product 15.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 29,
+          "user": "User29",
+          "comment": "Excellent quality.",
+          "stars": 5
+        },
+        {
+          "id": 30,
+          "user": "User30",
+          "comment": "Would buy again.",
+          "stars": 5
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Product 16",
+      "description": "This is a description for Product 16.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 31,
+          "user": "User31",
+          "comment": "Just okay.",
+          "stars": 3
+        },
+        {
+          "id": 32,
+          "user": "User32",
+          "comment": "Meets expectations.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Product 17",
+      "description": "This is a description for Product 17.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 33,
+          "user": "User33",
+          "comment": "Highly recommend.",
+          "stars": 5
+        },
+        {
+          "id": 34,
+          "user": "User34",
+          "comment": "Good purchase.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Product 18",
+      "description": "This is a description for Product 18.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 35,
+          "user": "User35",
+          "comment": "Very satisfied.",
+          "stars": 5
+        },
+        {
+          "id": 36,
+          "user": "User36",
+          "comment": "Decent product.",
+          "stars": 3
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Product 19",
+      "description": "This is a description for Product 19.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 37,
+          "user": "User37",
+          "comment": "Amazing!",
+          "stars": 5
+        },
+        {
+          "id": 38,
+          "user": "User38",
+          "comment": "Good value for money.",
+          "stars": 4
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Product 20",
+      "description": "This is a description for Product 20.",
+      "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "reviews": [
+        {
+          "id": 39,
+          "user": "User39",
+          "comment": "Would not recommend.",
+          "stars": 2
+        },
+        {
+          "id": 40,
+          "user": "User40",
+          "comment": "Satisfied with the purchase.",
+          "stars": 4
+        }
+      ]
+    }
+  ]
+}
