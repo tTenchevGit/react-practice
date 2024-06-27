@@ -10,13 +10,13 @@
           "id": 1,
           "user": "User1",
           "comment": "Great product!",
-          "stars": 5
+          "stars": 2
         },
         {
           "id": 2,
           "user": "User2",
           "comment": "Very useful.",
-          "stars": 4
+          "stars": 0
         }
       ]
     },

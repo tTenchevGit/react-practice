@@ -72,7 +72,7 @@ const NavBar = ({ setFilter }) => {
       <style jsx>{`
         nav {
           padding: 10px;
-          background-color: #f8f9fa;
+          background-color: black;
         }
         ul {
           list-style: none;
@@ -85,7 +85,7 @@ const NavBar = ({ setFilter }) => {
         }
         a {
           text-decoration: none;
-          color: #007bff;
+          color: white;
           cursor: pointer;
         }
         a.active {
