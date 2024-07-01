@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
 
-const ProductList = ({ filter }) => {
+const ProductList = ({ filter, addToCart }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const ProductList = ({ filter }) => {
   return (
     <div className="product-list">
       {products.map(product => (
-        <ProductItem key={product.id} product={product} />
+        <ProductItem key={product.id} product={product} addToCart={addToCart} />
       ))}
       <style jsx>{`
         .product-list {

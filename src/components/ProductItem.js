@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, addToCart }) => {
   const averageStars = product.reviews.reduce((acc, review) => acc + review.stars, 0) / product.reviews.length;
 
   return (
@@ -10,9 +10,20 @@ const ProductItem = ({ product }) => {
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>Stars: {averageStars.toFixed(1)}</p>
+      <p>Price: {product.price ? `$${product.price}` : 'Out of Stock'}</p> {/* Add this line to display the price */}
+      <div>
       <Link to={`/products/${product.id}`}>
         <button>More Info</button>
       </Link>
+      
+      <button
+         className={`add-to-cart ${!product.price ? 'disabled' : ''}`}
+        onClick={() => addToCart(product)}
+        disabled={!product.price} // Disable button if no price is available
+      >
+        {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
+      </button>
+      </div>
       <style jsx>{`
         .product-item {
           border: 1px solid #ddd;
@@ -28,14 +39,21 @@ const ProductItem = ({ product }) => {
           align-items: center;
           text-align: center;
         }
+        
         img {
           max-width: 100%;
           height: auto;
           border-radius: 5px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
         }
+
+        button.add-to-cart.disabled {
+          background-color: grey;
+          cursor: not-allowed;
+          color: white;
+        }
         button {
-          margin-top: 10px;
+          margin: 10px;
           padding: 5px 10px;
           background-color: #007bff;
           color: white;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const ProductDetail = () => {
+const ProductDetail = ({ addToCart }) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -23,7 +23,13 @@ const ProductDetail = () => {
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>Stars: {averageStars.toFixed(1)}</p>
-      <button>Add to Cart</button>
+      <button
+         className={`add-to-cart ${!product.price ? 'disabled' : ''}`}
+        onClick={() => addToCart(product)}
+        disabled={!product.price} // Disable button if no price is available
+      >
+        {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
+      </button>
       <style jsx>{`
         .product-detail {
           padding: 20px;
@@ -35,6 +41,11 @@ const ProductDetail = () => {
           max-width: 100%;
           height: auto;
           border-radius: 5px;
+        }
+        button.add-to-cart.disabled {
+          background-color: grey;
+          cursor: not-allowed;
+          color: white;
         }
         button {
           margin-top: 10px;

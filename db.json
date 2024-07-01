@@ -5,6 +5,7 @@
       "name": "Product 1",
       "description": "This is a description for Product 1.",
       "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "price": 10,
       "reviews": [
         {
           "id": 1,
