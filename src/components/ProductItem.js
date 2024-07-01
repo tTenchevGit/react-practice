@@ -10,7 +10,7 @@ const ProductItem = ({ product, addToCart }) => {
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>Stars: {averageStars.toFixed(1)}</p>
-      <p>Price: {product.price ? `$${product.price}` : 'Out of Stock'}</p> {/* Add this line to display the price */}
+      <p>{product.price ? `Price: $${product.price}` : 'Out of Stock'}</p> {/* Add this line to display the price */}
       <div>
       <Link to={`/products/${product.id}`}>
         <button>More Info</button>
