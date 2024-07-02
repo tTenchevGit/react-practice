@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const ProductDetail = ({ addToCart }) => {
   const { id } = useParams();
@@ -30,6 +30,17 @@ const ProductDetail = ({ addToCart }) => {
       >
         {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
       </button>
+      <Link to={`/products/${id}/add-review`}>
+        <button>Add Review</button>
+      </Link>
+      <div className="reviews">
+        <h3>Reviews</h3>
+        {product.reviews.map(review => (
+          <div key={review.id} className="review">
+            <p><strong>{review.user}</strong>: {review.comment} (Stars: {review.stars})</p>
+          </div>
+        ))}
+      </div>
       <style jsx>{`
         .product-detail {
           padding: 20px;
@@ -48,7 +59,7 @@ const ProductDetail = ({ addToCart }) => {
           color: white;
         }
         button {
-          margin-top: 10px;
+          margin: 10px;
           padding: 10px 20px;
           background-color: #007bff;
           color: white;
@@ -58,6 +69,16 @@ const ProductDetail = ({ addToCart }) => {
         }
         button:hover {
           background-color: #0056b3;
+        }
+        .reviews {
+          margin-top: 20px;
+          text-align: left;
+        }
+        .review {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          margin-bottom: 10px;
         }
       `}</style>
     </div>

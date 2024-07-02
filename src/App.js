@@ -4,19 +4,14 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
-import Cart from './components/Cart'; // Import the new Cart component
+import Cart from './components/Cart';
+import AddReview from './components/AddReview'; // Import the AddReview component
 
 const App = () => {
-  // State to manage the filter for product list
   const [filter, setFilter] = useState(null);
-
-  // State to manage the visibility of the cart
   const [cartVisible, setCartVisible] = useState(false);
-
-  // State to manage the items in the cart
   const [cartItems, setCartItems] = useState([]);
 
-  // Function to handle adding items to the cart
   const addToCart = (product) => {
     const existingItem = cartItems.find(item => item.id === product.id);
     let updatedCart;
@@ -28,26 +23,23 @@ const App = () => {
       updatedCart = [...cartItems, { ...product, quantity: 1 }];
     }
     setCartItems(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save to local storage
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
-  // Function to handle removing items from the cart
   const removeFromCart = (id) => {
     const updatedCart = cartItems.filter(item => item.id !== id);
     setCartItems(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save to local storage
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
-  // Function to update the quantity of items in the cart
   const updateCartItemQuantity = (id, quantity) => {
     const updatedItems = cartItems.map(item =>
       item.id === id ? { ...item, quantity } : item
     );
     setCartItems(updatedItems);
-    localStorage.setItem('cart', JSON.stringify(updatedItems)); // Save to local storage
+    localStorage.setItem('cart', JSON.stringify(updatedItems));
   };
 
-  // Function to toggle the cart visibility
   const handleCartButtonClick = () => {
     setCartVisible(!cartVisible);
   };
@@ -58,6 +50,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} />} />
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
+        <Route path="/products/:id/add-review" element={<AddReview />} /> {/* Add this route */}
       </Routes>
       <Footer />
       <Cart
@@ -65,7 +58,7 @@ const App = () => {
         onClose={() => setCartVisible(false)}
         cartItems={cartItems}
         removeFromCart={removeFromCart}
-        updateCartItemQuantity={updateCartItemQuantity} // Pass updateCartItemQuantity to Cart component
+        updateCartItemQuantity={updateCartItemQuantity}
       />
       <style jsx global>{`
         body {
