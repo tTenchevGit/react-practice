@@ -1,35 +1,59 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFromCart }) => { // Use props to manage cart items
+const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFromCart }) => {
+  const cartRef = useRef(null);
 
-    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (cartRef.current && !cartRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
 
-  // If the cart is not visible, return null to not render the cart
+    const handleTouchOutside = (event) => {
+      if (cartRef.current && !cartRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleTouchOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleTouchOutside);
+    };
+  }, [onClose]);
+
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   if (!isVisible) return null;
 
   return (
-    <div className="cart">
+    <div className="cart" ref={cartRef}>
       <button className="close-button" onClick={onClose}>×</button>
       <h2>Cart</h2>
       {cartItems.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
-        cartItems.map(item => (
-          <div key={item.id} className="cart-item">
-            <img src={item.image} alt={item.name} />
-            <div>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              <p>Total: ${(item.price * item.quantity).toFixed(2)}</p> {/* Show the total price for each item */}
-              <input
-                type="number"
-                value={item.quantity}
-                onChange={e => updateCartItemQuantity(item.id, parseInt(e.target.value))} // Use the prop to update quantity
-              />
-              <button onClick={() => removeFromCart(item.id)}>Remove</button> {/* Add remove button */}
+        <div className="cart-items-container">
+          {cartItems.map(item => (
+            <div key={item.id} className="cart-item">
+              <img src={item.image} alt={item.name} />
+              <div>
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
+                <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
+                <input
+                  type="number"
+                  value={item.quantity}
+                  onChange={e => updateCartItemQuantity(item.id, parseInt(e.target.value))}
+                />
+                <button onClick={() => removeFromCart(item.id)}>Remove</button>
+              </div>
             </div>
-          </div>
-        ))
+          ))}
+        </div>
       )}
       <style jsx>{`
         .cart {
@@ -47,15 +71,40 @@ const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFro
         }
 
         .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: black;
-          }
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          color: black;
+        }
+
+        .cart-items-container {
+          overflow-y: auto;
+          max-height: calc(100vh - 200px);
+          scrollbar-width: thin;
+          scrollbar-color: #888 #f1f1f1;
+        }
+
+        .cart-items-container::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        .cart-items-container::-webkit-scrollbar-track {
+          background-color: #f1f1f1;
+        }
+
+        .cart-items-container::-webkit-scrollbar-thumb {
+          background-color: #888;
+          border-radius: 4px;
+        }
+
+        .cart-items-container::-webkit-scrollbar-thumb:hover {
+          background-color: #555;
+        }
+
         .cart-item {
           display: flex;
           align-items: center;

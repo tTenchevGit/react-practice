@@ -2,10 +2,10 @@
   "products": [
     {
       "id": "1",
-      "name": "Product 1",
-      "description": "This is a description for Product 1.",
+      "name": "Supercar Model X",
+      "description": "Experience the ultimate speed and luxury with the Supercar Model X.",
       "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
-      "price": 10,
+      "price": 150000,
       "reviews": [
         {
           "id": 1,
@@ -35,9 +35,10 @@
     },
     {
       "id": "2",
-      "name": "Product 2",
-      "description": "This is a description for Product 2.",
+      "name": "Electric Scooter Pro",
+      "description": "Eco-friendly and efficient, the Electric Scooter Pro is perfect for city commuting.",
       "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "price": 1200,
       "reviews": [
         {
           "id": 3,
@@ -95,9 +96,10 @@
     },
     {
       "id": "5",
-      "name": "Product 5",
-      "description": "This is a description for Product 5.",
+      "name": "Luxury Watch Series 5",
+      "description": "Elegant and sophisticated, the Luxury Watch Series 5 is a timeless piece.",
       "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "price": 5000,
       "reviews": [
         {
           "id": 9,
@@ -155,9 +157,10 @@
     },
     {
       "id": "8",
-      "name": "Product 8",
-      "description": "This is a description for Product 8.",
+      "name": "Smartphone Pro Max",
+      "description": "The latest Smartphone Pro Max offers cutting-edge technology and sleek design.",
       "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "price": 999,
       "reviews": [
         {
           "id": 15,
@@ -255,9 +258,10 @@
     },
     {
       "id": "13",
-      "name": "Product 13",
-      "description": "This is a description for Product 13.",
+      "name": "Gaming Laptop Xtreme",
+      "description": "The Gaming Laptop Xtreme offers unparalleled performance for hardcore gamers.",
       "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "price": 2500,
       "reviews": [
         {
           "id": 25,
@@ -295,9 +299,10 @@
     },
     {
       "id": "15",
-      "name": "Product 15",
-      "description": "This is a description for Product 15.",
+      "name": "Luxury Handbag",
+      "description": "Crafted from premium materials, the Luxury Handbag is both stylish and functional.",
       "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+      "price": 350,
       "reviews": [
         {
           "id": 29,

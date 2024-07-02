@@ -1,20 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const NavBar = ({ setFilter, handleCartButtonClick }) => {
   const [activeFilter, setActiveFilter] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false); // State to manage the hamburger menu
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    const handleTouchOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleTouchOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleTouchOutside);
+    };
+  }, []);
 
   const handleFilterClick = (filter) => {
     setActiveFilter(filter);
     setFilter(filter);
     navigate('/');
-    setMenuOpen(false); // Close the menu when a filter is clicked
+    setMenuOpen(false);
   };
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen); // Toggle the menu open/close state
+    setMenuOpen(!menuOpen);
   };
 
   return (
@@ -23,7 +46,7 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
         <div className="hamburger" onClick={toggleMenu}>
           ☰
         </div>
-        <ul className={menuOpen ? 'open' : ''}>
+        <ul ref={menuRef} className={menuOpen ? 'open' : ''}>
           <li>
             <a 
               href="#" 
@@ -79,7 +102,7 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
             </a>
           </li>
         </ul>
-        <button className="cart-button" onClick={handleCartButtonClick}>Cart</button> {/* Cart button */}
+        <button className="cart-button" onClick={handleCartButtonClick}>Cart</button>
       </div>
       <style jsx>{`
         nav {

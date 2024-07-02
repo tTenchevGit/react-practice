@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
@@ -5,12 +6,14 @@ import Footer from './components/Footer';
 import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
-import AddReview from './components/AddReview'; // Import the AddReview component
+import AddReview from './components/AddReview';
+import SearchBar from './components/SearchBar'; // Import the SearchBar component
 
 const App = () => {
   const [filter, setFilter] = useState(null);
   const [cartVisible, setCartVisible] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(''); // State for managing search query
 
   const addToCart = (product) => {
     const existingItem = cartItems.find(item => item.id === product.id);
@@ -24,6 +27,7 @@ const App = () => {
     }
     setCartItems(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setCartVisible(true);
   };
 
   const removeFromCart = (id) => {
@@ -47,10 +51,11 @@ const App = () => {
   return (
     <div className="App">
       <NavBar setFilter={setFilter} handleCartButtonClick={handleCartButtonClick} />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> {/* Add the SearchBar */}
       <Routes>
-        <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} />} />
+        <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} searchQuery={searchQuery} />} /> {/* Pass searchQuery to ProductList */}
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
-        <Route path="/products/:id/add-review" element={<AddReview />} /> {/* Add this route */}
+        <Route path="/products/:id/add-review" element={<AddReview />} />
       </Routes>
       <Footer />
       <Cart
