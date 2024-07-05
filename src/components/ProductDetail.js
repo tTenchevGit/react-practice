@@ -4,9 +4,9 @@ import { useParams, Link } from 'react-router-dom';
 /**
  * Renders a detailed view of a product, including its image, description, average review rating, and the ability to add it to the cart or leave a review.
  *
- * @param {Object} props - The component props.
- * @param {function} props.addToCart - A function to add the product to the cart.
- * @returns {JSX.Element} The product detail component.
+ * @param {Object} props - 
+ * @param {function} props.addToCart - 
+ * @returns {JSX.Element} 
  */
 const ProductDetail = ({ addToCart }) => {
   const { id } = useParams();
@@ -33,7 +33,7 @@ const ProductDetail = ({ addToCart }) => {
       <button
          className={`add-to-cart ${!product.price ? 'disabled' : ''}`}
         onClick={() => addToCart(product)}
-        disabled={!product.price} // Disable button if no price is available
+        disabled={!product.price}
       >
         {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
       </button>
