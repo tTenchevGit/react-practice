@@ -1,11 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+// src/components/NavBar.js
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../ThemeContext';
 
-const NavBar = ({ setFilter, handleCartButtonClick }) => {
+const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
   const [activeFilter, setActiveFilter] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef(null);
+  const { isDarkMode } = useContext(ThemeContext);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -38,6 +41,7 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    
   };
 
   return (
@@ -103,14 +107,16 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
           </li>
         </ul>
         <button className="cart-button" onClick={handleCartButtonClick}>Cart</button>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
       </div>
       <style jsx>{`
         nav {
           padding: 10px;
-          background-color: black;
+          background-color: ${isDarkMode ? 'black' : 'white'};
+          color: ${isDarkMode ? 'white' : 'black'};
           position: relative;
-          
-          
         }
         .nav-content {
           display: flex;
@@ -118,9 +124,10 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
           align-items: center;
         }
         .hamburger {
+          
           display: none;
           cursor: pointer;
-          color: white;
+          color: ${isDarkMode ? 'white' : 'black'};
           font-size: 24px;
         }
         ul {
@@ -139,14 +146,14 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
           background-color: black;
           flex-direction: column;
           align-items: center;
-          border-radius: 5px ;
+          border-radius: 5px;
         }
         li {
           margin: 0 10px;
         }
         a {
           text-decoration: none;
-          color: white;
+          color: ${isDarkMode ? 'white' : 'black'};
           cursor: pointer;
         }
         ul.open a {
@@ -166,20 +173,32 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
           border: none;
           padding: 10px;
           cursor: pointer;
-          margin-right:35px;
+          margin-right: 35px;
         }
         .cart-button:hover {
           background-color: #0056b3;
         }
+        .theme-toggle {
+          margin-right: 10px;
+          padding: 5px 10px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        .theme-toggle:hover {
+          background-color: #0056b3;
+        }
         @media (max-width: 768px) {
           .cart-button {
-           margin-right:35px;
+            margin-right: 35px;
           }
-          nav{
+          nav {
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1000; 
+            z-index: 1000;
           }
           .hamburger {
             display: block;
@@ -190,7 +209,6 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
             top: 40px;
             left: 0;
             width: 100%;
-            
             flex-direction: column;
             align-items: center;
           }

@@ -1,5 +1,5 @@
-// App.js
-import React, { useState } from 'react';
+// src/App.js
+import React, { useState, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
@@ -7,19 +7,18 @@ import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
 import AddReview from './components/AddReview';
-import SearchBar from './components/SearchBar'; 
+import SearchBar from './components/SearchBar';
 import CheckoutPage from './components/CheckoutPage';
-
-
+import { ThemeContext } from './ThemeContext';
 
 const App = () => {
   const [filter, setFilter] = useState(null);
   const [cartVisible, setCartVisible] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(''); // State for managing search query
+  const [searchQuery, setSearchQuery] = useState('');
 
- 
-  
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
   const addToCart = (product) => {
     const existingItem = cartItems.find(item => item.id === product.id);
     let updatedCart;
@@ -54,11 +53,15 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <NavBar setFilter={setFilter} handleCartButtonClick={handleCartButtonClick} />
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> {/* Add the SearchBar */}
+    <div className="App" style={{ backgroundColor: isDarkMode ? 'black' : 'white', color: isDarkMode ? 'white' : 'black' }}>
+      <NavBar
+        setFilter={setFilter}
+        handleCartButtonClick={handleCartButtonClick}
+        toggleTheme={toggleTheme}
+      />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Routes>
-        <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} searchQuery={searchQuery} />} /> {/* Pass searchQuery to ProductList */}
+        <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} searchQuery={searchQuery} />} />
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
         <Route path="/products/:id/add-review" element={<AddReview />} />
         <Route path="/checkout" element={<CheckoutPage cartItems={cartItems} removeFromCart={removeFromCart} />} />

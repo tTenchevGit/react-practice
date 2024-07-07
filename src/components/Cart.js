@@ -8,6 +8,7 @@ const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFro
 
   const handleCheckoutClick = () => {
     navigate('/checkout');
+    onClose();
   };
 
   useEffect(() => {
@@ -32,12 +33,8 @@ const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFro
     };
   }, [onClose]);
 
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-  if (!isVisible) return null;
-
   return (
-    <div className="cart" ref={cartRef}>
+    <div className={`cart ${isVisible ? 'visible' : ''}`} ref={cartRef}>
       <button className="close-button" onClick={onClose}>×</button>
       <h2>Cart</h2>
       {cartItems.length === 0 ? (
@@ -61,44 +58,45 @@ const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFro
             </div>
           ))}
           <div className='checkout-wrapper'>
-          <button className="checkout-button" onClick={handleCheckoutClick} >Checkout</button>
+            <button className="checkout-button" onClick={handleCheckoutClick} >Checkout</button>
           </div>
         </div>
       )}
       <style jsx>{`
-        .checkout-wrapper{
+        .checkout-wrapper {
           display: flex;
           justify-content: center;
           align-items: center;
         }
-        .checkout-button{
+        .checkout-button {
           margin: 40px auto;
-           
-            padding: 10px 20px;
-            background-color: #0070f3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.2s ease-in-out;
+          padding: 10px 20px;
+          background-color: #0070f3;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+          font-weight: bold;
+          transition: background-color 0.2s ease-in-out;
         }
-        
         .cart {
           position: fixed;
-          right: 0;
-          top: 77px;
+          top: 0;
+          right: -400px; /* Off-screen */
           width: 300px;
-          height: 90%;
+          height: 100%;
           background-color: white;
           box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
           padding: 20px;
           z-index: 1000;
           display: flex;
           flex-direction: column;
+          transition: right 0.3s ease-in-out;
         }
-
+        .cart.visible {
+          right: 0; /* On-screen */
+        }
         .close-button {
           position: absolute;
           top: 10px;
@@ -109,31 +107,25 @@ const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFro
           cursor: pointer;
           color: black;
         }
-
         .cart-items-container {
           overflow-y: auto;
-          max-height: calc(100vh - 200px);
+          max-height: calc(100vh - 100px);
           scrollbar-width: thin;
           scrollbar-color: #888 #f1f1f1;
         }
-
         .cart-items-container::-webkit-scrollbar {
           width: 8px;
         }
-
         .cart-items-container::-webkit-scrollbar-track {
           background-color: #f1f1f1;
         }
-
         .cart-items-container::-webkit-scrollbar-thumb {
           background-color: #888;
           border-radius: 4px;
         }
-
         .cart-items-container::-webkit-scrollbar-thumb:hover {
           background-color: #555;
         }
-
         .cart-item {
           display: flex;
           align-items: center;
