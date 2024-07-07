@@ -114,7 +114,7 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
       <style jsx>{`
         nav {
           padding: 10px;
-          background-color: ${isDarkMode ? 'black' : 'white'};
+          background-color: ${isDarkMode ? 'white' : 'black'};
           color: ${isDarkMode ? 'white' : 'black'};
           position: relative;
         }
@@ -127,7 +127,7 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
           
           display: none;
           cursor: pointer;
-          color: ${isDarkMode ? 'white' : 'black'};
+          color: ${isDarkMode ? 'black' : 'white'};
           font-size: 24px;
         }
         ul {
@@ -153,7 +153,7 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
         }
         a {
           text-decoration: none;
-          color: ${isDarkMode ? 'white' : 'black'};
+          color: ${isDarkMode ? 'black' : 'white'};
           cursor: pointer;
         }
         ul.open a {

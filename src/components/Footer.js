@@ -10,10 +10,11 @@ const Footer = () => {
       <p>My React Website &copy; 2024</p>
       <style jsx>{`
         footer {
-          color : ${isDarkMode ? 'black' : 'black'} !important;
+          color : ${isDarkMode ? 'black' : 'white'} !important;
+          background-color: ${isDarkMode ? 'white' : 'black'};
           margin-top: 20px;
           padding: 10px;
-          background-color: #f1f1f1;
+         
           text-align: center;
         }
       `}</style>
