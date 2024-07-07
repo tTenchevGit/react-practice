@@ -12,7 +12,9 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
       />
       <style jsx>{`
         .search-bar {
+         
           margin: 20px auto;
+          margin-top: 125px;
           max-width: 600px;
           text-align: center;
         }

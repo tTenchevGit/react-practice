@@ -109,6 +109,8 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
           padding: 10px;
           background-color: black;
           position: relative;
+          
+          
         }
         .nav-content {
           display: flex;
@@ -164,13 +166,20 @@ const NavBar = ({ setFilter, handleCartButtonClick }) => {
           border: none;
           padding: 10px;
           cursor: pointer;
+          margin-right:35px;
         }
         .cart-button:hover {
           background-color: #0056b3;
         }
         @media (max-width: 768px) {
+          .cart-button {
+           margin-right:35px;
+          }
           nav{
-            
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; 
           }
           .hamburger {
             display: block;

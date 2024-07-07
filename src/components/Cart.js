@@ -1,7 +1,14 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFromCart }) => {
   const cartRef = useRef(null);
+
+  const navigate = useNavigate();
+
+  const handleCheckoutClick = () => {
+    navigate('/checkout');
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -53,15 +60,37 @@ const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFro
               </div>
             </div>
           ))}
+          <div className='checkout-wrapper'>
+          <button className="checkout-button" onClick={handleCheckoutClick} >Checkout</button>
+          </div>
         </div>
       )}
       <style jsx>{`
+        .checkout-wrapper{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .checkout-button{
+          margin: 40px auto;
+           
+            padding: 10px 20px;
+            background-color: #0070f3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.2s ease-in-out;
+        }
+        
         .cart {
           position: fixed;
           right: 0;
-          top: 0;
+          top: 77px;
           width: 300px;
-          height: 100%;
+          height: 90%;
           background-color: white;
           box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
           padding: 20px;

@@ -7,7 +7,10 @@ import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
 import AddReview from './components/AddReview';
-import SearchBar from './components/SearchBar'; // Import the SearchBar component
+import SearchBar from './components/SearchBar'; 
+import CheckoutPage from './components/CheckoutPage';
+
+
 
 const App = () => {
   const [filter, setFilter] = useState(null);
@@ -15,6 +18,8 @@ const App = () => {
   const [cartItems, setCartItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState(''); // State for managing search query
 
+ 
+  
   const addToCart = (product) => {
     const existingItem = cartItems.find(item => item.id === product.id);
     let updatedCart;
@@ -56,6 +61,7 @@ const App = () => {
         <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} searchQuery={searchQuery} />} /> {/* Pass searchQuery to ProductList */}
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
         <Route path="/products/:id/add-review" element={<AddReview />} />
+        <Route path="/checkout" element={<CheckoutPage cartItems={cartItems} removeFromCart={removeFromCart} />} />
       </Routes>
       <Footer />
       <Cart

@@ -51,6 +51,18 @@
           "user": "User4",
           "comment": "I like it.",
           "stars": 4
+        },
+        {
+          "id": 1720345498088,
+          "user": "johnny",
+          "comment": "grat product",
+          "stars": 0
+        },
+        {
+          "id": 1720345527194,
+          "user": "Peter",
+          "comment": "Great product",
+          "stars": 5
         }
       ]
     },

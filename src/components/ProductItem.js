@@ -38,6 +38,7 @@ const ProductItem = ({ product, addToCart }) => {
           flex-direction: column;
           align-items: center;
           text-align: center;
+         
         }
         
         img {
