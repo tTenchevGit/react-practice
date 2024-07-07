@@ -105,11 +105,16 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
               1 Star
             </a>
           </li>
+          <li>
+          <a className="theme-toggle" onClick={toggleTheme}>
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        </a>
+        </li>
         </ul>
         <button className="cart-button" onClick={handleCartButtonClick}>Cart</button>
-        <button className="theme-toggle" onClick={toggleTheme}>
+        {/* <button className="theme-toggle" onClick={toggleTheme}>
           {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
+        </button> */}
       </div>
       <style jsx>{`
         nav {
