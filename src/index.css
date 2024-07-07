@@ -23,6 +23,7 @@ code {
 body {
   color: var(--light-text);
   background-color: var(--light-bg);
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
 }
 
 body.dark-mode {
@@ -36,3 +37,28 @@ body.dark-mode {
     background-color: var(--dark-bg);
   }
 }
+
+/* Ensure all text elements inherit color */
+h1, h2, h3, h4, h5, h6, p, a, span, div {
+  color: inherit;
+}
+
+/* Specific elements with custom colors */
+.nav-content a {
+  color: var(--light-text);
+}
+
+.nav-content a.dark-mode {
+  color: var(--dark-text);
+}
+
+.nav-content a:hover {
+  text-decoration: underline;
+}
+
+.nav-content a.active {
+  font-weight: bold;
+  color: #0056b3;
+  border-bottom: 2px solid #0056b3;
+}
+

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
+
 
 /**
  * Renders a detailed view of a product, including its image, description, average review rating, and the ability to add it to the cart or leave a review.
@@ -11,6 +12,7 @@ import { useParams, Link } from 'react-router-dom';
 const ProductDetail = ({ addToCart }) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  
 
   useEffect(() => {
     fetch(`http://localhost:4000/products/${id}`)
@@ -50,6 +52,7 @@ const ProductDetail = ({ addToCart }) => {
       </div>
       <style jsx>{`
         .product-detail {
+          
           padding: 20px;
           max-width: 800px;
           margin: 0 auto;

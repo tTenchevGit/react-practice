@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../ThemeContext';
 
 const ProductItem = ({ product, addToCart }) => {
   const averageStars = product.reviews.reduce((acc, review) => acc + review.stars, 0) / product.reviews.length;
+  const { isDarkMode } = useContext(ThemeContext);
 
   return (
     <div className="product-item">
@@ -26,6 +28,7 @@ const ProductItem = ({ product, addToCart }) => {
       </div>
       <style jsx>{`
         .product-item {
+          color: ${isDarkMode ? 'black' : 'black'} !important;
           border: 1px solid #ddd;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
           padding: 10px;

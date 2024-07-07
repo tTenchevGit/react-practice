@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../ThemeContext';
 
 const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFromCart }) => {
   const cartRef = useRef(null);
-
+  const { isDarkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const handleCheckoutClick = () => {
@@ -81,6 +82,7 @@ const Cart = ({ isVisible, onClose, cartItems, updateCartItemQuantity, removeFro
           transition: background-color 0.2s ease-in-out;
         }
         .cart {
+          color: ${isDarkMode ? 'black' : 'black'} !important;
           position: fixed;
           top: 0;
           right: -400px; /* Off-screen */
