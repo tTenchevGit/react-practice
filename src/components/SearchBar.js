@@ -7,7 +7,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
       <input
         type="text"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)} // Handle input change to update search query
+        onChange={(e) => setSearchQuery(e.target.value)} 
         placeholder="Search for products..."
       />
       <style jsx>{`
