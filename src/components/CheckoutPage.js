@@ -126,6 +126,8 @@ const CheckoutPage = ({ cartItems, removeFromCart }) => {
 
         input {
           padding: 5px;
+          width: 100%; 
+          box-sizing: border-box;
         }
 
         button[type='submit'] {

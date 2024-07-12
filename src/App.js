@@ -17,8 +17,8 @@ const App = () => {
   const [cartItems, setCartItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
    const location = useLocation();
-  const isProductDetailPage = matchPath('/products/:id', location.pathname);
-  // const isMainOrHashLink = location.pathname === '/' || location.pathname.startsWith('/#');
+  // const isProductDetailPage = matchPath('/products/:id', location.pathname);
+  const isMainOrHashLink = location.pathname === '/' || location.pathname.startsWith('/#');
 
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
@@ -63,12 +63,12 @@ const App = () => {
         toggleTheme={toggleTheme}
       />
        {/* Render the SearchBar only if the current route does not match '/products/:id' */}
-       {/* {isMainOrHashLink && (
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      )} */}
-       {!isProductDetailPage && (
+       {isMainOrHashLink && (
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       )}
+       {/* {!isProductDetailPage && (
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      )} */}
       <Routes>
         <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} searchQuery={searchQuery} />} />
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
