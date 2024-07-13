@@ -21,7 +21,7 @@ const ProductItem = ({ product, addToCart }) => {
       <button
          className={`add-to-cart ${!product.price ? 'disabled' : ''}`}
         onClick={() => addToCart(product)}
-        disabled={!product.price} // Disable button if no price is available
+        disabled={!product.price} 
       >
         {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
       </button>

@@ -61,7 +61,7 @@ const ProductDetail = ({ addToCart }) => {
         img {
           max-width: 100%;
           height: auto;
-          border-radius: 5px;
+          border-radius: 5px; 
         }
         button.add-to-cart.disabled {
           background-color: grey;
