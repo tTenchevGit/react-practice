@@ -23,7 +23,7 @@ code {
 body {
   color: var(--light-text);
   background-color: var(--light-bg);
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
+  transition: background-color 0.3s, color 0.4s; 
 }
 
 body.dark-mode {
