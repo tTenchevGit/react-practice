@@ -1,6 +1,7 @@
 
-import firebase from "firebase/compat/app"; // Updated to use compat version
+import firebase from "firebase/compat/app"; 
 import "firebase/compat/auth";
+import "firebase/compat/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBojQmTeKYASgDfgSPWC2khqf05WFjHcPg",
@@ -20,4 +21,5 @@ if (!firebase.apps.length) {
   }
   
   export const auth = firebase.auth();
+  export const db = firebase.database();
   export default firebase;

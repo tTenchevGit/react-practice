@@ -1,47 +1,99 @@
-import React, { useContext, useState  } from 'react';
+// src/components/ProductItem.js
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
-import { auth } from '../firebaseConfig'; // this is new
+import { auth, db } from '../firebaseConfig';
 
 const ProductItem = ({ product, addToCart }) => {
   const averageStars = product.reviews.reduce((acc, review) => acc + review.stars, 0) / product.reviews.length;
   const { isDarkMode } = useContext(ThemeContext);
-  const [isWishlisted, setIsWishlisted] = useState(false); // this is new
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
-  const handleWishlist = () => { // this is new
+  useEffect(() => {
+    const checkWishlist = async (user) => {
+      if (user) {
+        try {
+          const userId = user.uid;
+          console.log(`Checking wishlist for user: ${userId}`); // Debug log
+          const wishlistRef = db.ref(`wishlists/${userId}`);
+          wishlistRef.on('value', snapshot => {
+            const wishlist = snapshot.val();
+            console.log(`Fetched wishlist for user ${userId}:`, wishlist); // Debug log
+            if (wishlist && wishlist.includes(product.id)) {
+              setIsWishlisted(true);
+            } else {
+              setIsWishlisted(false);
+            }
+          });
+        } catch (error) {
+          console.error('Error fetching wishlist:', error);
+        }
+      } else {
+        console.log('No authenticated user found'); // Debug log
+      }
+    };
+
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        checkWishlist(user);
+      } else {
+        setIsWishlisted(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [product.id]);
+
+  const handleWishlist = async () => {
     if (auth.currentUser) {
-      setIsWishlisted(!isWishlisted);
-      // Save wishlist to a backend or localStorage as needed.
-      // Example: saveWishlist(product.id);
+      try {
+        const userId = auth.currentUser.uid;
+        const wishlistRef = db.ref(`wishlists/${userId}`);
+        wishlistRef.once('value', snapshot => {
+          const wishlist = snapshot.val() || [];
+          if (isWishlisted) {
+            // Remove from wishlist
+            const updatedWishlist = wishlist.filter(id => id !== product.id);
+            wishlistRef.set(updatedWishlist);
+            console.log(`Removed ${product.id} from wishlist for user ${userId}`);
+          } else {
+            // Add to wishlist
+            const updatedWishlist = [...wishlist, product.id];
+            wishlistRef.set(updatedWishlist);
+            console.log(`Added ${product.id} to wishlist for user ${userId}`);
+          }
+          setIsWishlisted(!isWishlisted);
+        });
+      } catch (error) {
+        console.error('Error updating wishlist:', error);
+      }
     } else {
       alert("Please log in to add to wishlist.");
     }
   };
 
-
   return (
     <div className="product-item">
-      <h2>{product.name} </h2>
+      <h2>{product.name}</h2>
       <button onClick={handleWishlist}>
           {isWishlisted ? "⭐" : "☆"}
-        </button> {/* this is new */}
+        </button>
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>Stars: {averageStars.toFixed(1)}</p>
-      <p>{product.price ? `Price: $${product.price}` : 'Out of Stock'}</p> {/* Add this line to display the price */}
+      <p>{product.price ? `Price: $${product.price}` : 'Out of Stock'}</p>
       <div>
-      <Link to={`/products/${product.id}`}>
-        <button>More Info</button>
-      </Link>
-      
-      <button
-         className={`add-to-cart ${!product.price ? 'disabled' : ''}`}
-        onClick={() => addToCart(product)}
-        disabled={!product.price} 
-      >
-        {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
-      </button>
-      
+        <Link to={`/products/${product.id}`}>
+          <button>More Info</button>
+        </Link>
+        <button
+          className={`add-to-cart ${!product.price ? 'disabled' : ''}`}
+          onClick={() => addToCart(product)}
+          disabled={!product.price}
+        >
+          {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
+        </button>
+       
       </div>
       <style jsx>{`
         .product-item {
@@ -58,16 +110,13 @@ const ProductItem = ({ product, addToCart }) => {
           flex-direction: column;
           align-items: center;
           text-align: center;
-         
         }
-        
         img {
           max-width: 100%;
           height: auto;
           border-radius: 5px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
         }
-
         button.add-to-cart.disabled {
           background-color: grey;
           cursor: not-allowed;

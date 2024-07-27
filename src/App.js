@@ -75,7 +75,7 @@ const App = () => {
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
         <Route path="/products/:id/add-review" element={<AddReview />} />
         <Route path="/checkout" element={<CheckoutPage cartItems={cartItems} removeFromCart={removeFromCart} />} />
-        <Route path="/login" element={<Login />} /> {/* this is new */}
+        <Route path="/login" element={<Login />} />
         {/* Protect routes that require authentication */}
         <Route path="/protected" element={<ProtectedRoute />}>
           <Route path="/protected/some-component" element={<SomeProtectedComponent />} />
@@ -89,7 +89,7 @@ const App = () => {
         removeFromCart={removeFromCart}
         updateCartItemQuantity={updateCartItemQuantity}
       />
-      <style jsx global>{`
+      <style>{`
         body {
           font-family: Arial, sans-serif;
           margin: 0;
