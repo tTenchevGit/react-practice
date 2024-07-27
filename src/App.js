@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useContext } from 'react';
-import { Routes, Route, useLocation, matchPath } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import ProductList from './components/ProductList';
@@ -10,14 +10,19 @@ import AddReview from './components/AddReview';
 import SearchBar from './components/SearchBar';
 import CheckoutPage from './components/CheckoutPage';
 import { ThemeContext } from './ThemeContext';
+import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+
+const SomeProtectedComponent = () => {
+  return <div>Protected Content</div>;
+};
 
 const App = () => {
   const [filter, setFilter] = useState(null);
   const [cartVisible, setCartVisible] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-   const location = useLocation();
-  // const isProductDetailPage = matchPath('/products/:id', location.pathname);
+  const location = useLocation();
   const isMainOrHashLink = location.pathname === '/' || location.pathname.startsWith('/#');
 
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
@@ -62,18 +67,19 @@ const App = () => {
         handleCartButtonClick={handleCartButtonClick}
         toggleTheme={toggleTheme}
       />
-       {/* Render the SearchBar only if the current route does not match '/products/:id' */}
-       {isMainOrHashLink && (
+      {isMainOrHashLink && (
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       )}
-       {/* {!isProductDetailPage && (
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      )} */}
       <Routes>
         <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} searchQuery={searchQuery} />} />
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
         <Route path="/products/:id/add-review" element={<AddReview />} />
         <Route path="/checkout" element={<CheckoutPage cartItems={cartItems} removeFromCart={removeFromCart} />} />
+        <Route path="/login" element={<Login />} /> {/* this is new */}
+        {/* Protect routes that require authentication */}
+        <Route path="/protected" element={<ProtectedRoute />}>
+          <Route path="/protected/some-component" element={<SomeProtectedComponent />} />
+        </Route>
       </Routes>
       <Footer />
       <Cart

@@ -1,14 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState  } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
+import { auth } from '../firebaseConfig'; // this is new
 
 const ProductItem = ({ product, addToCart }) => {
   const averageStars = product.reviews.reduce((acc, review) => acc + review.stars, 0) / product.reviews.length;
   const { isDarkMode } = useContext(ThemeContext);
+  const [isWishlisted, setIsWishlisted] = useState(false); // this is new
+
+  const handleWishlist = () => { // this is new
+    if (auth.currentUser) {
+      setIsWishlisted(!isWishlisted);
+      // Save wishlist to a backend or localStorage as needed.
+      // Example: saveWishlist(product.id);
+    } else {
+      alert("Please log in to add to wishlist.");
+    }
+  };
+
 
   return (
     <div className="product-item">
-      <h2>{product.name}</h2>
+      <h2>{product.name} </h2>
+      <button onClick={handleWishlist}>
+          {isWishlisted ? "⭐" : "☆"}
+        </button> {/* this is new */}
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>Stars: {averageStars.toFixed(1)}</p>
@@ -25,6 +41,7 @@ const ProductItem = ({ product, addToCart }) => {
       >
         {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
       </button>
+      
       </div>
       <style jsx>{`
         .product-item {

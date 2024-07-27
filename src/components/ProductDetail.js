@@ -55,7 +55,7 @@ const ProductDetail = ({ addToCart }) => {
           
           padding: 20px;
           max-width: 800px;
-          margin: 0 auto;
+          margin: 10px auto;
           text-align: center;
         }
         img {
@@ -89,6 +89,14 @@ const ProductDetail = ({ addToCart }) => {
           border: 1px solid #ddd;
           border-radius: 5px;
           margin-bottom: 10px;
+        }
+
+        @media (max-width: 1000px) {
+          .product-detail {
+          
+            margin: 80px auto;
+            
+          }
         }
       `}</style>
     </div>
