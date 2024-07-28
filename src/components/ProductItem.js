@@ -8,6 +8,7 @@ const ProductItem = ({ product, addToCart }) => {
   const averageStars = product.reviews.reduce((acc, review) => acc + review.stars, 0) / product.reviews.length;
   const { isDarkMode } = useContext(ThemeContext);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication state
 
   useEffect(() => {
     const checkWishlist = async (user) => {
@@ -35,8 +36,10 @@ const ProductItem = ({ product, addToCart }) => {
 
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
+        setIsAuthenticated(true);
         checkWishlist(user);
       } else {
+        setIsAuthenticated(false);
         setIsWishlisted(false);
       }
     });
@@ -75,9 +78,11 @@ const ProductItem = ({ product, addToCart }) => {
   return (
     <div className="product-item">
       <h2>{product.name}</h2>
-      <button onClick={handleWishlist}>
-          {isWishlisted ? "⭐" : "☆"}
-        </button>
+      {isAuthenticated && (
+          <button onClick={handleWishlist}>
+            {isWishlisted ? "⭐" : "☆"}
+          </button>
+        )}
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>Stars: {averageStars.toFixed(1)}</p>
@@ -93,7 +98,7 @@ const ProductItem = ({ product, addToCart }) => {
         >
           {product.price ? `Add to Cart - $${product.price}` : 'Out of Stock'}
         </button>
-       
+      
       </div>
       <style jsx>{`
         .product-item {

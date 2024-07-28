@@ -67,9 +67,11 @@ const App = () => {
         handleCartButtonClick={handleCartButtonClick}
         toggleTheme={toggleTheme}
       />
+      
       {isMainOrHashLink && (
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       )}
+      
       <Routes>
         <Route path="/" element={<ProductList filter={filter} addToCart={addToCart} searchQuery={searchQuery} />} />
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
