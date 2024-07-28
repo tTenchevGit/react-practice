@@ -1,34 +1,36 @@
 // src/components/NavBar.js
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
+import { auth } from '../firebaseConfig';
+import WishlistButton from './WishlistButton';
 
-const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
+const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
   const [activeFilter, setActiveFilter] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef(null);
+  const dropdownRef = useRef(null);
   const { isDarkMode } = useContext(ThemeContext);
+  console.log('NavBar rendered', { user });
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (menuRef.current && !menuRef.current.contains(event.target) && !event.target.classList.contains('hamburger')) {
         setMenuOpen(false);
       }
-    };
-
-    const handleTouchOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenuOpen(false);
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && !event.target.classList.contains('profile-photo')) {
+        setDropdownVisible(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleTouchOutside);
+    document.addEventListener('touchstart', handleClickOutside);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleTouchOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     };
   }, []);
 
@@ -40,8 +42,22 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
   };
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-    
+    setMenuOpen((prev) => !prev);
+    setDropdownVisible(false); // Close the dropdown if the menu is toggled
+  };
+
+  const toggleDropdown = () => {
+    setDropdownVisible((prev) => !prev);
+    setMenuOpen(false); // Close the menu if the dropdown is toggled
+  };
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      navigate('/');
+    } catch (error) {
+      console.error("Error logging out: ", error);
+    }
   };
 
   return (
@@ -106,39 +122,82 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
             </a>
           </li>
           <li>
-          <a className="theme-toggle" onClick={toggleTheme}>
-          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </a>
-        
-        </li>
-      
+            <a className="theme-toggle" onClick={toggleTheme}>
+              {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+            </a>
+          </li>
         </ul>
-        
+        <div className='userPhoto' ref={dropdownRef}>
+  {user ? (
+    <div className="profile-container" onClick={toggleDropdown}>
+      <img src="https://as2.ftcdn.net/v2/jpg/03/01/37/81/1000_F_301378128_CNipnqxgozfbclphnmH86cYmKMSc9JfC.jpg" alt="Profile" className="profile-photo" />
+      {dropdownVisible && (
+        <div className="dropdown-menu">
+          <button onClick={handleLogout}>Logout</button>
+          <Link className='whish' to="/whish">Wishlist</Link>
+        </div>
+      )}
+    </div>
+  ) : (
+    <div className="auth-buttons">
+      <button onClick={() => navigate('/login')}>Login</button>
+      <button onClick={() => navigate('/signup')}>Sign Up</button>
+    </div>
+  )}
+</div>
         <button className="cart-button" onClick={handleCartButtonClick}>Cart</button>
-        
-        {/* <button className="theme-toggle" onClick={toggleTheme}>
-          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </button> */}
       </div>
       <style jsx>{`
+        .profile-container {
+          position: relative; /* Ensure the parent container is relatively positioned */
+        }
+
+        .whish{
+        background-color: #007bff;
+          color: white;
+          border: none;
+          padding: 5px;
+          cursor: pointer;
+          border-radius: 5px;
+          margin-left: 10px;
+          }
+
+        .dropdown-menu {
+          position: absolute; /* Position the dropdown menu absolutely */
+          top: 100%; /* Position it below the profile photo */
+          right: 0; /* Align it to the right */
+          background-color: white; /* Background color for the dropdown */
+          border: 1px solid #ccc; /* Border for the dropdown */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for better visibility */
+          z-index: 1000; /* Ensure it appears above other elements */
+          padding: 10px; /* Optional: Add some padding */
+        }
+
+        .userPhoto {
+          position: relative;
+          max-width: 50px;
+        }
+      
         nav {
           padding: 10px;
           background-color: ${isDarkMode ? 'white' : 'black'};
           color: ${isDarkMode ? 'white' : 'black'};
           position: relative;
         }
+
         .nav-content {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
+
         .hamburger {
-          
           display: none;
           cursor: pointer;
           color: ${isDarkMode ? 'black' : 'white'};
           font-size: 24px;
         }
+
         ul {
           list-style: none;
           padding: 0;
@@ -146,6 +205,7 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
           justify-content: space-around;
           margin: 0;
         }
+
         ul.open {
           display: block;
           position: absolute;
@@ -157,25 +217,31 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
           align-items: center;
           border-radius: 5px;
         }
+
         li {
           margin: 0 10px;
         }
+
         a {
           text-decoration: none;
           color: ${isDarkMode ? 'black' : 'white'};
           cursor: pointer;
         }
+
         ul.open a {
           color: white;
         }
+
         a.active {
           font-weight: bold;
           color: #0056b3;
           border-bottom: 2px solid #0056b3;
         }
+
         a:hover {
           text-decoration: underline;
         }
+
         .cart-button {
           background-color: #007bff;
           color: white;
@@ -184,9 +250,11 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
           cursor: pointer;
           margin-right: 35px;
         }
+
         .cart-button:hover {
           background-color: #0056b3;
         }
+
         .theme-toggle {
           margin-right: 10px;
           padding: 5px 10px;
@@ -196,22 +264,27 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
           border-radius: 5px;
           cursor: pointer;
         }
+
         .theme-toggle:hover {
           background-color: #0056b3;
         }
+
         @media (max-width: 768px) {
           .cart-button {
             margin-right: 35px;
           }
+
           nav {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
           }
+
           .hamburger {
             display: block;
           }
+
           ul {
             display: ${menuOpen ? 'block' : 'none'};
             position: absolute;
@@ -221,6 +294,7 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme }) => {
             flex-direction: column;
             align-items: center;
           }
+
           li {
             margin: 30px 10px;
           }

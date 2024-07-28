@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
@@ -12,6 +12,10 @@ import CheckoutPage from './components/CheckoutPage';
 import { ThemeContext } from './ThemeContext';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import SignUp from './components/SignUp';
+import { auth } from './firebaseConfig';
+import WishlistButton from './components/WishlistButton';
+
 
 const SomeProtectedComponent = () => {
   return <div>Protected Content</div>;
@@ -22,10 +26,23 @@ const App = () => {
   const [cartVisible, setCartVisible] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [user, setUser] = useState(null);
   const location = useLocation();
   const isMainOrHashLink = location.pathname === '/' || location.pathname.startsWith('/#');
 
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const addToCart = (product) => {
     const existingItem = cartItems.find(item => item.id === product.id);
@@ -63,6 +80,8 @@ const App = () => {
   return (
     <div className="App" style={{ backgroundColor: isDarkMode ? 'black' : 'white', color: isDarkMode ? 'white' : 'black' }}>
       <NavBar
+
+        user = {user}
         setFilter={setFilter}
         handleCartButtonClick={handleCartButtonClick}
         toggleTheme={toggleTheme}
@@ -78,6 +97,13 @@ const App = () => {
         <Route path="/products/:id/add-review" element={<AddReview />} />
         <Route path="/checkout" element={<CheckoutPage cartItems={cartItems} removeFromCart={removeFromCart} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/whish" element={<WishlistButton />} />
+        
+
+        <Route path="/protected" element={<ProtectedRoute />}>
+          <Route path="/protected/some-component" element={<SomeProtectedComponent />} />
+        </Route>
         {/* Protect routes that require authentication */}
         <Route path="/protected" element={<ProtectedRoute />}>
           <Route path="/protected/some-component" element={<SomeProtectedComponent />} />
