@@ -130,7 +130,7 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
         <div className='userPhoto' ref={dropdownRef}>
   {user ? (
     <div className="profile-container" onClick={toggleDropdown}>
-      <img src="https://as2.ftcdn.net/v2/jpg/03/01/37/81/1000_F_301378128_CNipnqxgozfbclphnmH86cYmKMSc9JfC.jpg" alt="Profile" className="profile-photo" />
+      <img style={{ maxWidth: '50px' }} src="https://as2.ftcdn.net/v2/jpg/03/01/37/81/1000_F_301378128_CNipnqxgozfbclphnmH86cYmKMSc9JfC.jpg" alt="Profile" className="profile-photo" />
       {dropdownVisible && (
         <div className="dropdown-menu">
           <button onClick={handleLogout}>Logout</button>
@@ -168,7 +168,7 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
           right: 0; /* Align it to the right */
           background-color: white; /* Background color for the dropdown */
           border: 1px solid #ccc; /* Border for the dropdown */
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for better visibility */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
           z-index: 1000; /* Ensure it appears above other elements */
           padding: 10px; /* Optional: Add some padding */
         }
