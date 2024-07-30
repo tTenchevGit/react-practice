@@ -43,12 +43,12 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
-    setDropdownVisible(false); // Close the dropdown if the menu is toggled
+    setDropdownVisible(false); 
   };
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
-    setMenuOpen(false); // Close the menu if the dropdown is toggled
+    setMenuOpen(false); 
   };
 
   const handleLogout = async () => {
