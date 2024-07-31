@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
 import { auth } from '../firebaseConfig';
-import WishlistButton from './WishlistButton';
+// import WishlistButton from './WishlistButton';
 
 const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
   const [activeFilter, setActiveFilter] = useState(null);

@@ -83,6 +83,7 @@
       "name": "Product 3",
       "description": "This is a description for Product 3.",
       "image": "https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp",
+     
       "reviews": [
         {
           "id": 5,
@@ -136,6 +137,12 @@
           "user": "User10",
           "comment": "Good product.",
           "stars": 4
+        },
+        {
+          "id": 1722341629662,
+          "user": "Joto",
+          "comment": "not bad",
+          "stars": 3
         }
       ]
     },
