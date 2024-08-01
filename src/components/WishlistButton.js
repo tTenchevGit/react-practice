@@ -14,7 +14,7 @@ const WishlistButton = ({ addToCart }) => {
         const ids = await fetchWishlist(userId);
         setWishlistIds(ids);
       }
-    };
+    }; // Added fetchWishlistIds function
 
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
