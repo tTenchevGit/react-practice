@@ -1,4 +1,4 @@
-// src/components/WishlistButton.js
+
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebaseConfig';
 import { fetchWishlist } from '../utils/wishlistUtils';
@@ -14,7 +14,7 @@ const WishlistButton = ({ addToCart }) => {
         const ids = await fetchWishlist(userId);
         setWishlistIds(ids);
       }
-    }; // Added fetchWishlistIds function
+    }; 
 
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
