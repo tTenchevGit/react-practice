@@ -43,7 +43,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button className='buttonsLogin' onClick={handleLogin}>Login</button>
-      {/* <button onClick={handleSignup}>Sign Up</button> */}
+     
       <button className='buttonsLogin' onClick={() => navigate('/Signup')}>Sign Up</button>
     
       <style jsx>{`
