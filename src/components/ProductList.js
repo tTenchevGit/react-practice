@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
 
-const ProductList = ({ filter, addToCart, searchQuery, wishlistIds }) => { // Added wishlistIds as a prop
+const ProductList = ({ filter, addToCart, searchQuery, wishlistIds }) => { 
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
