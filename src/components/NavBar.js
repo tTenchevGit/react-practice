@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
 import { auth } from '../firebaseConfig';
-// import WishlistButton from './WishlistButton';
+
 
 const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
   const [activeFilter, setActiveFilter] = useState(null);
@@ -166,11 +166,11 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
           position: absolute; /* Position the dropdown menu absolutely */
           top: 100%; /* Position it below the profile photo */
           right: 0; /* Align it to the right */
-          background-color: white; /* Background color for the dropdown */
-          border: 1px solid #ccc; /* Border for the dropdown */
+          background-color: white; 
+          border: 1px solid #ccc; 
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-          z-index: 1000; /* Ensure it appears above other elements */
-          padding: 10px; /* Optional: Add some padding */
+          z-index: 1000;
+          padding: 10px; 
         }
 
         .userPhoto {
