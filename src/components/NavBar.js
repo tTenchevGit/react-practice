@@ -149,7 +149,7 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
       </div>
       <style jsx>{`
         .profile-container {
-          position: relative; /* Ensure the parent container is relatively positioned */
+          position: relative; 
         }
 
         .whish{
@@ -163,8 +163,8 @@ const NavBar = ({ setFilter, handleCartButtonClick, toggleTheme, user }) => {
           }
 
         .dropdown-menu {
-          position: absolute; /* Position the dropdown menu absolutely */
-          top: 100%; /* Position it below the profile photo */
+          position: absolute; 
+          top: 100%; 
           right: 0; /* Align it to the right */
           background-color: white; 
           border: 1px solid #ccc; 
