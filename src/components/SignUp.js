@@ -34,7 +34,7 @@ const SignUp = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="button" className="buttonsLogin" onClick={handleSignup}>
-                    Sign Up
+                    Sign Up here
                 </button>
             </form>
             <style jsx>{`
