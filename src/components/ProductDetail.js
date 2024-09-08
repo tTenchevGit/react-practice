@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 
 
 /**
- * Renders a detailed view of a product, including its image, description, average review rating, and the ability to add it to the cart or leave a review.
+ 
  *
  * @param {Object} props - 
  * @param {function} props.addToCart - 
